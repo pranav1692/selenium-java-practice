@@ -1,0 +1,25 @@
+package pages;
+
+import Extensions.UiElementExtension;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class EmployeeListPage {
+
+    private WebDriver driver;
+
+    public EmployeeListPage(WebDriver driver){
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+    @FindBy(xpath = "//a[@href='/Employee/Create']")
+    private WebElement btnCreateNew;
+
+    public CreateEmployeePage createEmployeePage(){
+        UiElementExtension.performClick(btnCreateNew);
+        return new CreateEmployeePage(driver);
+    }
+}
