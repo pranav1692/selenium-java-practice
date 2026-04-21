@@ -32,15 +32,31 @@ public class LoginPage {
     @FindBy(css = ".btn")
     private WebElement btnLogin;
 
+    public boolean isUsernameVisible() {
+        return txtUserName.isDisplayed();
+    }
+
+    public boolean isPasswordVisible() {
+        return txtPassword.isDisplayed();
+    }
+
+    public boolean isLoginButtonVisible() {
+        return btnLogin.isDisplayed();
+    }
+
     public HomePage performLogin(String username, String password){
         //UiElementExtension.performEnterText(txtUserName, username);
         //UiElementExtension.performEnterText(txtPassword, password);
         wait.until(ExpectedConditions.visibilityOf(txtUserName)).sendKeys(username);
         wait.until(ExpectedConditions.visibilityOf(txtPassword)).sendKeys(password);
         UiElementExtension.performClick(btnLogin);
-
-
-
         return  new HomePage(driver);
+    }
+
+    @FindBy(css = ".validation-summary-errors")
+    private WebElement errorMessage;
+
+    public boolean isErrorDisplayed() {
+        return errorMessage.isDisplayed();
     }
 }
