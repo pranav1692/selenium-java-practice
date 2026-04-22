@@ -45,7 +45,13 @@ public class HomePage {
         return new EmployeeListPage(driver);
     }
 
+    public boolean isEmployeeButtonVisible() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOf(employeeList)).isDisplayed();
+    }
+
     public void Logoff(WebDriver driver){
         UiElementExtension.performClick(btnLogout);
     }
+
 }

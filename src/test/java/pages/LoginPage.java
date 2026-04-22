@@ -56,7 +56,20 @@ public class LoginPage {
     @FindBy(css = ".validation-summary-errors")
     private WebElement errorMessage;
 
+    @FindBy(id = "UserName-error")
+    private WebElement usernameError;
+
+    @FindBy(id = "Password-error")
+    private WebElement passwordError;
+
     public boolean isErrorDisplayed() {
+        wait.until(ExpectedConditions.visibilityOf(errorMessage));
         return errorMessage.isDisplayed();
+    }
+    public boolean isusernameErrorDisplayed() {
+        return usernameError.isDisplayed();
+    }
+    public boolean ispasswordErrorDisplayed() {
+        return passwordError.isDisplayed();
     }
 }
