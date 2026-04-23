@@ -2,10 +2,12 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.Assert.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.EmployeeListPage;
@@ -18,17 +20,24 @@ public class EmployeeListPageTest {
     HomePage homePage;
     private pages.LoginPage loginPage;
 
+    @Parameters({"browser", "url", "username", "password"})
     @BeforeMethod
-    public void beforeMethod()
-    {
-        driver = new ChromeDriver();
-        driver.navigate().to("http://eaapp.somee.com/");
+    public void beforeMethod(String browser, String testURL, String username, String password) {
+        switch (browser) {
+            case "chrome":
+                driver = new ChromeDriver();
+                break;
+            case "edge":
+                driver = new EdgeDriver();
+                break;
+        }
+        driver.navigate().to(testURL);
         driver.manage().window().maximize();
 
         homePage = new HomePage(driver);
         loginPage = homePage.clickLogin();
 
-        homePage = loginPage.performLogin("admin", "password");
+        homePage = loginPage.performLogin(username, password);
     }
 
     @Test(priority = 0)
@@ -61,14 +70,14 @@ public class EmployeeListPageTest {
         softAssert.assertAll();
     }
 
+    @Parameters("empname")
     @Test(priority=2)
-    public void testSearchEmployee() {
+    public void testSearchEmployee(String empname) {
         EmployeeListPage employeeListPage = homePage.clickEmployeeList();
 
-        String empName = "Sarah Johnson";
-        employeeListPage.searchEmployee(empName);
+        employeeListPage.searchEmployee(empname);
         String empResult = employeeListPage.getEmployeeName();
-        Assert.assertEquals(empResult, empName, "Employee name mismatch");
+        Assert.assertEquals(empResult, empname, "Employee name mismatch");
     }
 
     // Test class - partial search validation

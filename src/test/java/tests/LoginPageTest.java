@@ -2,6 +2,8 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
@@ -15,22 +17,28 @@ public class LoginPageTest {
     private pages.LoginPage loginPage;
 
 
+    @Parameters({"browser", "url"})
     @BeforeMethod
-    public void beforeMethod() {
-        driver = new ChromeDriver();
-        driver.navigate().to("http://eaapp.somee.com/");
+    public void beforeMethod(String browser, String testURL) {
+        switch (browser) {
+            case "chrome":
+                driver = new ChromeDriver();
+                break;
+                case "edge":
+                    driver = new EdgeDriver();
+                    break;
+        }
+        driver.navigate().to(testURL);
         driver.manage().window().maximize();
     }
 
+    @Parameters("signInPageTitle")
     @Test(priority = 0)
-    public void testLogin(){
-        SoftAssert softAssert = new SoftAssert();
+    public void testLogin(String signInPageTitle) {
 
         homePage = new HomePage(driver);
         loginPage = homePage.clickLogin();
-
-        softAssert.assertEquals("Sign In — EA Employee App", driver.getTitle());
-        softAssert.assertAll();
+        Assert.assertEquals(signInPageTitle, driver.getTitle());
     }
 
     @Test(priority = 1)
@@ -46,29 +54,26 @@ public class LoginPageTest {
         softAssert.assertAll();
     }
 
+    @Parameters({"username", "password"})
     @Test(priority = 2)
-    public void testValidLogin(){
-        SoftAssert softAssert = new SoftAssert();
+    public void testValidLogin(String username, String password) {
 
         homePage = new HomePage(driver);
         loginPage = homePage.clickLogin();
 
-        homePage = loginPage.performLogin("admin", "password") ;
-        softAssert.assertTrue(homePage.isLogoutDisplayed(), "Login Failed");
-        softAssert.assertAll();
+        homePage = loginPage.performLogin(username, password) ;
+        Assert.assertTrue(homePage.isLogoutDisplayed(), "Login Failed");
     }
 
     @Test(priority = 3)
     public void testInvalidLogin() {
-        SoftAssert softAssert = new SoftAssert();
 
         homePage = new HomePage(driver);
         loginPage = homePage.clickLogin();
 
-        homePage = loginPage.performLogin("admin", "wrongpassword");
+        loginPage.performLogin("admin", "wrongpassword");
 
-        softAssert.assertTrue(loginPage.isErrorDisplayed());
-        softAssert.assertAll();
+        Assert.assertTrue(loginPage.isErrorDisplayed());
     }
 
     @Test(priority = 4)
@@ -78,7 +83,7 @@ public class LoginPageTest {
         homePage = new HomePage(driver);
         loginPage = homePage.clickLogin();
 
-        homePage = loginPage.performLogin("", "");
+        loginPage.performLogin("", "");
 
         softAssert.assertTrue(loginPage.isusernameErrorDisplayed());
         softAssert.assertTrue(loginPage.ispasswordErrorDisplayed());
