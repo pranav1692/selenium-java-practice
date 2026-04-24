@@ -48,12 +48,13 @@ public class EmployeeListPageTest {
         softAssert.assertAll();
     }
 
+    @Parameters("employeePageTitle")
     @Test(priority=1)
-    public void testEmployeePageTitle(){
+    public void testEmployeePageTitle(String employeePageTitle){
         EmployeeListPage employeeListPage = homePage.clickEmployeeList();
 
         String actualTitle = driver.getTitle();
-        String expectedTitle = "Employee List - EAEmployee";
+        String expectedTitle = employeePageTitle;
 
         Assert.assertEquals(actualTitle, expectedTitle, "Employee page title mismatch");
     }
@@ -81,13 +82,13 @@ public class EmployeeListPageTest {
     }
 
     // Test class - partial search validation
-
+    @Parameters("partialempname")
     @Test
-    public void testPartialEmployeeSearch() {
+    public void testPartialEmployeeSearch(String partialempname) {
 
         EmployeeListPage employeeListPage = homePage.clickEmployeeList();
 
-        String keyword = "Test";
+        String keyword = partialempname;
 
         employeeListPage.searchEmployee(keyword);
 

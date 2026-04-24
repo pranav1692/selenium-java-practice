@@ -14,7 +14,9 @@
     </test>
 
     <test name="EmployeeTests">
+        <parameter name="employeePageTitle" value="Employee List - EAEmployee"></parameter>
         <parameter name="empname" value="Sarah Johnson"></parameter>
+        <parameter name="partialempname" value="Sarah"></parameter>
         <classes>
             <class name="tests.EmployeeListPageTest"/>
         </classes>
