@@ -39,6 +39,7 @@ public class EmployeeListPage {
     @FindBy(className = "emp-name")
     WebElement txtEmpName;
 
+
     public CreateEmployeePage createEmployeePage(){
         UiElementExtension.performClick(btnCreateNew);
         return new CreateEmployeePage(driver);
@@ -85,5 +86,10 @@ public class EmployeeListPage {
         }
 
         return names;
+    }
+
+    public boolean isNewEmployeeButtonVisible() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOf(btnNewEmployee)).isDisplayed();
     }
 }

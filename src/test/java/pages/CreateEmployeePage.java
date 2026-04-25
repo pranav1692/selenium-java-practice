@@ -48,4 +48,8 @@ public class CreateEmployeePage {
         UiElementExtension.performEnterText(empEmail, email);
         UiElementExtension.performClick(submitbtn);
     }
+
+//    public boolean isCreateEmployeePageVisible(){
+//
+//    }
 }

@@ -22,4 +22,18 @@
         </classes>
     </test>
 
+    <test name = "CreateNewEmployeeTest">
+        <parameter name="createNewEmployeePageTitle" value="Create Employee - EAEmployee"></parameter>
+        <classes>
+            <class name="tests.CreateNewEmployeeTest"/>
+        </classes>
+    </test>
 </suite>
+
+<!--<suite name="AutomationTestingPractice">-->
+<!--    <test name="">-->
+<!--        <classes>-->
+<!--            <class name=""></class>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--</suite>-->
