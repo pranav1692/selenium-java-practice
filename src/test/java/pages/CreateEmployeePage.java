@@ -36,6 +36,21 @@ public class CreateEmployeePage {
     @FindBy(className = "btn-submit")
     private WebElement submitbtn;
 
+    @FindBy(id = "Name-error")
+    private  WebElement nameError;
+
+    @FindBy(id = "Age-error")
+    private   WebElement ageError;
+
+    @FindBy(id = "Salary-error")
+    private   WebElement salaryError;
+
+    @FindBy(id = "DurationWorked-error")
+    private   WebElement durationWorkedError;
+
+    @FindBy(id = "Email-error")
+    private    WebElement emailError;
+
 
     //createEmployee
     public void createNewEmployee(String name, String age, String salary, String durationWorked, String email){
@@ -49,7 +64,40 @@ public class CreateEmployeePage {
         UiElementExtension.performClick(submitbtn);
     }
 
-//    public boolean isCreateEmployeePageVisible(){
-//
-//    }
+    //Ui elements Methods
+    public boolean isNameVisible(){
+        return empName.isDisplayed();
+    }
+    public boolean isAgeVisible(){
+        return empAge.isDisplayed();
+    }
+    public boolean isSalaryVisible(){
+        return  empSalary.isDisplayed();
+    }
+    public  boolean isDurationWorkedVisible(){
+        return empDurationWorked.isDisplayed();
+    }
+    public boolean isGradeVisible(){
+        return empGrade.isDisplayed();
+    }
+    public  boolean isEmailVisible(){
+        return empEmail.isDisplayed();
+    }
+
+    // Error Methods
+    public boolean isNameErrorDisplayed(){
+        return  nameError.isDisplayed();
+    }
+    public  boolean isAgeErrorDisplayed(){
+        return   ageError.isDisplayed();
+    }
+    public  boolean isSalaryErrorDisplayed(){
+        return   salaryError.isDisplayed();
+    }
+    public   boolean isDurationWorkedErrorDisplayed(){
+        return   durationWorkedError.isDisplayed();
+    }
+    public   boolean isEmailErrorDisplayed(){
+        return    emailError.isDisplayed();
+    }
 }
