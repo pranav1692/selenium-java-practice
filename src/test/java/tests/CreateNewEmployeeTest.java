@@ -2,6 +2,8 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,6 +11,8 @@ import org.testng.asserts.SoftAssert;
 import pages.CreateEmployeePage;
 import pages.EmployeeListPage;
 import pages.HomePage;
+
+import java.time.Duration;
 
 public class CreateNewEmployeeTest {
     private WebDriver driver;
@@ -75,7 +79,7 @@ public class CreateNewEmployeeTest {
     }
 
     @Test(priority = 1)
-    public void createNewEmployee() {
+    public void createNewEmptyEmployee() {
         SoftAssert softAssert = new SoftAssert();
 
         createEmployeePage.createNewEmployee("", "", "", "", "");
@@ -89,6 +93,21 @@ public class CreateNewEmployeeTest {
         softAssert.assertAll();
     }
 
+    @Test(priority = 2)
+    public void createNewEmployee() {
+        SoftAssert softAssert = new SoftAssert();
+
+        createEmployeePage.createNewEmployee("automated111", "25", "55000", "3", "automated121@gmail.com");
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.titleIs("Employee List - EAEmployee"));
+
+        String actualTitle = driver.getTitle();
+        String expectedTitle = "Employee List - EAEmployee";
+
+        softAssert.assertEquals(actualTitle, expectedTitle, "Employee page title mismatch");
+        softAssert.assertAll();
+    }
 
     @AfterMethod
     public void afterMethod() {
