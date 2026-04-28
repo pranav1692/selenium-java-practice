@@ -1,8 +1,14 @@
 package tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Assert.*;
 import org.testng.annotations.AfterMethod;
@@ -13,7 +19,9 @@ import org.testng.asserts.SoftAssert;
 import pages.EmployeeListPage;
 import pages.HomePage;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.function.Function;
 
 public class EmployeeListPageTest {
     private WebDriver driver;
@@ -81,7 +89,7 @@ public class EmployeeListPageTest {
         Assert.assertEquals(empResult, empname, "Employee name mismatch");
     }
 
-    // Test class - partial search validation
+
     @Parameters("partialempname")
     @Test
     public void testPartialEmployeeSearch(String partialempname) {
@@ -101,6 +109,7 @@ public class EmployeeListPageTest {
             );
         }
     }
+
 
     @AfterMethod
     public void afterMethod() {

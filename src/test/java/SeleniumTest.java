@@ -23,7 +23,7 @@ public class SeleniumTest {
         //createEmployee(driver);
         var employeeListPage = homePage.clickEmployeeList();
         var createEmployeePage = employeeListPage.createEmployeePage();
-        createEmployeePage.createNewEmployee("Test11", "32", "50000", "10", "test11@gmail.com");
+        createEmployeePage.createNewEmployee("Test11", "32", "50000", "10", "Junior","test11@gmail.com");
 
     }
 

@@ -1,29 +1,42 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="EAEmployeeSuite">
+<suite name="LoginPageTest">
     <parameter name="url" value="http://eaapp.somee.com/"/>
     <parameter name="username" value="admin"/>
     <parameter name="password" value="password"/>
     <parameter name="browser" value="chrome"/>
 
-    <test name="LoginTests">
-        <parameter name="signInPageTitle" value="Sign In — EA Employee App"/>
-        <classes>
-            <class name="tests.LoginPageTest"/>
-        </classes>
-    </test>
+<!--    <test name="LoginTests">-->
+<!--        <parameter name="signInPageTitle" value="Sign In — EA Employee App"/>-->
+<!--        <classes>-->
+<!--            <class name="tests.LoginPageTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="EmployeeTests">
-        <parameter name="employeePageTitle" value="Employee List - EAEmployee"/>
-        <parameter name="empname" value="Sarah Johnson"/>
-        <parameter name="partialempname" value="Sarah"/>
-        <classes>
-            <class name="tests.EmployeeListPageTest"/>
-        </classes>
-    </test>
+<!--    <test name="EmployeeListPageTests">-->
+<!--        <parameter name="employeePageTitle" value="Employee List - EAEmployee"/>-->
+<!--        <parameter name="empname" value="Sarah Johnson"/>-->
+<!--        <parameter name="partialempname" value="Sarah"/>-->
+<!--        -->
+<!--&lt;!&ndash;        update employee&ndash;&gt;-->
+<!--        <parameter name="editEmpName" value=""/>-->
+<!--        <classes>-->
+<!--            <class name="tests.EmployeeListPageTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name = "CreateNewEmployeeTest">
         <parameter name="createNewEmployeePageTitle" value="Create Employee - EAEmployee"/>
+
+<!--        creating new employee-->
+        <parameter name="name" value="automated"/>
+        <parameter name="age" value="25"/>
+        <parameter name="salary" value="55000"/>
+        <parameter name="durationWorked" value="3"/>
+<!--     grade value options - "Junior", "Middle", "Senior", "C-Level"-->
+        <parameter name="grade" value="Middle"/>
+        <parameter name="email" value="automated@gmail.com"/>
+
         <classes>
             <class name="tests.CreateNewEmployeeTest"/>
         </classes>

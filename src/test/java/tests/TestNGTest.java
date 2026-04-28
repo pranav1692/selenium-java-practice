@@ -30,7 +30,7 @@ public class TestNGTest {
     public void testBCreateEmployee() {
         var employeeListPage = homePage.clickEmployeeList();
         var createEmployeePage = employeeListPage.createEmployeePage();
-        createEmployeePage.createNewEmployee("Test13", "32", "50000", "10", "test13@gmail.com");
+        createEmployeePage.createNewEmployee("Test13", "32", "50000", "10", "Junior", "test13@gmail.com");
     }
 
     @AfterTest

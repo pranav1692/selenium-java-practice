@@ -53,13 +53,13 @@ public class CreateEmployeePage {
 
 
     //createEmployee
-    public void createNewEmployee(String name, String age, String salary, String durationWorked, String email){
+    public void createNewEmployee(String name, String age, String salary, String durationWorked, String grade, String email){
 
         UiElementExtension.performEnterText(empName, name);
         UiElementExtension.performEnterText(empAge, age);
         UiElementExtension.performEnterText(empSalary, salary);
         UiElementExtension.performEnterText(empDurationWorked, durationWorked);
-        UiElementExtension.performDropDownSelectionByText(empGrade, "Middle");
+        UiElementExtension.performDropDownSelectionByText(empGrade, grade);
         UiElementExtension.performEnterText(empEmail, email);
         UiElementExtension.performClick(submitbtn);
     }

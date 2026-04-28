@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class EmployeeListPage {
 
@@ -39,6 +40,8 @@ public class EmployeeListPage {
     @FindBy(className = "emp-name")
     WebElement txtEmpName;
 
+    @FindBy(className = "stat-badge")
+    WebElement empCount;
 
     public CreateEmployeePage createEmployeePage(){
         UiElementExtension.performClick(btnCreateNew);
@@ -88,8 +91,33 @@ public class EmployeeListPage {
         return names;
     }
 
+    // EmployeeListPage.java
+
+    public void clickEditButtonByEmail(String expectedEmail) {
+
+        List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
+
+        for (WebElement row : rows) {
+            String actualEmail = row.findElement(By.xpath("./td[6]")).getText().trim();
+
+            if (actualEmail.equalsIgnoreCase(expectedEmail)) {
+                row.findElement(By.xpath(".//a[contains(@href,'Edit')]")).click();
+                return;
+            }
+        }
+        throw new NoSuchElementException("Employee not found with email: " + expectedEmail);
+    }
+
     public boolean isNewEmployeeButtonVisible() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.visibilityOf(btnNewEmployee)).isDisplayed();
+    }
+
+    public int getEmpCount(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(empCount));
+        String text = empCount.getText();   // 📊 75 employees
+        String number = text.replaceAll("[^0-9]", ""); // 75
+        return Integer.parseInt(number);
     }
 }
